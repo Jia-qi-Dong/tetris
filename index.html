@@ -1612,22 +1612,28 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;div id=&quot;tetris-app-v1&quot;&gt;
   &lt;div class=&quot;tw-wrap&quot;&gt;
     &lt;div class=&quot;tw-board-col&quot;&gt;
-      &lt;div class=&quot;tw-board-frame&quot;&gt;
-        &lt;canvas id=&quot;twBoard&quot; class=&quot;tw-board&quot; width=&quot;300&quot; height=&quot;600&quot; role=&quot;img&quot; aria-label=&quot;俄罗斯方块棋盘，10 列 20 行&quot;&gt;&lt;/canvas&gt;
-        &lt;div class=&quot;tw-overlay&quot; id=&quot;twOverlay&quot;&gt;
-          &lt;div&gt;
-            &lt;h2 id=&quot;twOvTitle&quot;&gt;俄罗斯方块&lt;/h2&gt;
-            &lt;p class=&quot;text-small text-muted&quot; id=&quot;twOvText&quot;&gt;方向键移动与旋转，空格硬降，C 暂存&lt;/p&gt;
-            &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;twOvBtn&quot;&gt;开始游戏&lt;/button&gt;
+      &lt;div class=&quot;tw-stage&quot;&gt;
+        &lt;div class=&quot;tw-btn-col&quot; aria-label=&quot;左侧按键&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-blue&quot; id=&quot;tDrop&quot; aria-label=&quot;硬降&quot; data-tooltip=&quot;硬降&quot;&gt;&lt;i data-lucide=&quot;chevrons-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-red&quot; id=&quot;tLeft&quot; aria-label=&quot;左移&quot; data-tooltip=&quot;左移&quot;&gt;&lt;i data-lucide=&quot;arrow-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;tw-board-frame&quot;&gt;
+          &lt;canvas id=&quot;twBoard&quot; class=&quot;tw-board&quot; width=&quot;300&quot; height=&quot;600&quot; role=&quot;img&quot; aria-label=&quot;俄罗斯方块棋盘，10 列 20 行&quot;&gt;&lt;/canvas&gt;
+          &lt;div class=&quot;tw-overlay&quot; id=&quot;twOverlay&quot;&gt;
+            &lt;div&gt;
+              &lt;h2 id=&quot;twOvTitle&quot;&gt;俄罗斯方块&lt;/h2&gt;
+              &lt;p class=&quot;text-small text-muted&quot; id=&quot;twOvText&quot;&gt;方向键移动与旋转，空格硬降，C 暂存&lt;/p&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;twOvBtn&quot;&gt;开始游戏&lt;/button&gt;
+            &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
+        &lt;div class=&quot;tw-btn-col&quot; aria-label=&quot;右侧按键&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-orange&quot; id=&quot;tRotate&quot; aria-label=&quot;旋转&quot; data-tooltip=&quot;旋转&quot;&gt;&lt;i data-lucide=&quot;rotate-cw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-red&quot; id=&quot;tRight&quot; aria-label=&quot;右移&quot; data-tooltip=&quot;右移&quot;&gt;&lt;i data-lucide=&quot;arrow-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;tw-touch&quot; aria-label=&quot;触屏操作&quot;&gt;
-        &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tLeft&quot; aria-label=&quot;左移&quot; data-tooltip=&quot;左移&quot;&gt;&lt;i data-lucide=&quot;arrow-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-        &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tRight&quot; aria-label=&quot;右移&quot; data-tooltip=&quot;右移&quot;&gt;&lt;i data-lucide=&quot;arrow-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-        &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tRotate&quot; aria-label=&quot;旋转&quot; data-tooltip=&quot;旋转&quot;&gt;&lt;i data-lucide=&quot;rotate-cw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;div class=&quot;tw-touch&quot; aria-label=&quot;更多操作&quot;&gt;
         &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tDown&quot; aria-label=&quot;软降&quot; data-tooltip=&quot;软降&quot;&gt;&lt;i data-lucide=&quot;arrow-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-        &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tDrop&quot; aria-label=&quot;硬降&quot; data-tooltip=&quot;硬降&quot;&gt;&lt;i data-lucide=&quot;chevrons-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
         &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tHold&quot; aria-label=&quot;暂存方块&quot; data-tooltip=&quot;暂存&quot;&gt;&lt;i data-lucide=&quot;repeat&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -1665,17 +1671,25 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;/div&gt;
 
 &lt;style&gt;
-  #tetris-app-v1 { -webkit-tap-highlight-color: transparent; }
+  #tetris-app-v1 { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
   #tetris-app-v1 .tw-wrap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: flex-start; }
-  #tetris-app-v1 .tw-board-col { flex: 1 1 260px; max-width: 302px; min-width: 220px; }
-  #tetris-app-v1 .tw-board-frame { position: relative; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--card); }
+  #tetris-app-v1 .tw-board-col { flex: 1 1 300px; max-width: 466px; min-width: 0; }
+  #tetris-app-v1 .tw-stage { display: flex; align-items: flex-end; justify-content: center; gap: 8px; }
+  #tetris-app-v1 .tw-btn-col { display: flex; flex-direction: column; gap: 14px; flex: 0 0 auto; }
+  #tetris-app-v1 .tw-round { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--border); background: var(--card); display: flex; align-items: center; justify-content: center; padding: 0; color: var(--foreground); touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; box-shadow: 0 3px 10px color-mix(in srgb, var(--foreground) 12%, transparent); }
+  #tetris-app-v1 .tw-round:active { transform: scale(0.94); background: color-mix(in srgb, var(--primary) 12%, var(--card)); }
+  #tetris-app-v1 .tw-round svg { width: 30px; height: 30px; }
+  #tetris-app-v1 .tw-ic-blue svg { color: var(--blue); }
+  #tetris-app-v1 .tw-ic-red svg { color: var(--red); }
+  #tetris-app-v1 .tw-ic-orange svg { color: var(--orange); }
+  #tetris-app-v1 .tw-board-frame { position: relative; flex: 0 1 302px; min-width: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--card); }
   #tetris-app-v1 .tw-board { display: block; width: 100%; height: auto; }
   #tetris-app-v1 .tw-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; text-align: center; background: var(--popover); background: color-mix(in srgb, var(--popover) 88%, transparent); backdrop-filter: blur(2px); }
   #tetris-app-v1 .tw-overlay[hidden] { display: none; }
   #tetris-app-v1 .tw-overlay h2 { margin: 0 0 6px; }
   #tetris-app-v1 .tw-overlay p { margin: 0 0 14px; }
   #tetris-app-v1 .tw-touch { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
-  #tetris-app-v1 .tw-touch .btn { touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+  #tetris-app-v1 .tw-touch .btn { touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
   #tetris-app-v1 .tw-side { flex: 0 1 176px; min-width: 158px; display: flex; flex-direction: column; gap: 12px; }
   #tetris-app-v1 .tw-box { border: 1px solid var(--border); border-radius: 10px; background: var(--muted); background: color-mix(in srgb, var(--muted) 40%, transparent); padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 4px; }
   #tetris-app-v1 .tw-box canvas { display: block; width: 64px; height: auto; align-self: center; }
@@ -1690,6 +1704,10 @@ html&gt;body{padding:0}&lt;/style&gt;
     #tetris-app-v1 .tw-side { flex-direction: row; flex-wrap: wrap; align-items: flex-start; flex: 1 1 100%; }
     #tetris-app-v1 .tw-box { flex: 1 1 130px; }
     #tetris-app-v1 .tw-stats { flex: 1 1 120px; }
+    #tetris-app-v1 .tw-stage { gap: 6px; }
+    #tetris-app-v1 .tw-btn-col { gap: 10px; }
+    #tetris-app-v1 .tw-round { width: 56px; height: 56px; }
+    #tetris-app-v1 .tw-round svg { width: 26px; height: 26px; }
   }
 &lt;/style&gt;
 
@@ -2220,6 +2238,9 @@ html&gt;body{padding:0}&lt;/style&gt;
 
   appRoot.addEventListener(&#x27;pointerdown&#x27;, function () {
     try { window.focus(); } catch (e) {}
+  });
+  appRoot.addEventListener(&#x27;contextmenu&#x27;, function (e) {
+    if (e.target &amp;&amp; e.target.closest &amp;&amp; e.target.closest(&#x27;button&#x27;)) e.preventDefault();
   });
 
   window.addEventListener(&#x27;blur&#x27;, function () {
