@@ -1654,6 +1654,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;span class=&quot;text-small text-muted&quot;&gt;暂存&lt;/span&gt;
       &lt;canvas id=&quot;twHold&quot; width=&quot;64&quot; height=&quot;32&quot;&gt;&lt;/canvas&gt;
     &lt;/div&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tHold&quot; aria-label=&quot;暂存方块&quot; data-tooltip=&quot;暂存&quot;&gt;&lt;i data-lucide=&quot;repeat&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
     &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tDown&quot; aria-label=&quot;软降&quot; data-tooltip=&quot;软降&quot;&gt;&lt;i data-lucide=&quot;arrow-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
     &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;twRestart&quot; aria-label=&quot;重开&quot; data-tooltip=&quot;重开&quot;&gt;重开&lt;/button&gt;
     &lt;p class=&quot;text-small text-muted tw-keys&quot;&gt;&lt;code&gt;←&lt;/code&gt;&lt;code&gt;→&lt;/code&gt; 移动 · &lt;code&gt;↑&lt;/code&gt;/&lt;code&gt;X&lt;/code&gt; 旋转 · &lt;code&gt;Z&lt;/code&gt; 反转 · &lt;code&gt;↓&lt;/code&gt; 软降 · &lt;code&gt;空格&lt;/code&gt; 硬降 · &lt;code&gt;C&lt;/code&gt; 暂存 · &lt;code&gt;P&lt;/code&gt; 暂停 · &lt;code&gt;R&lt;/code&gt; 重开&lt;/p&gt;
@@ -1768,9 +1769,19 @@ html&gt;body{padding:0}&lt;/style&gt;
   var hctx = setupCanvas(holdC, 64, 32);
   var nctx = setupCanvas(nextC, 64, 32);
 
-  function themeColor(name) {
-    var v = getComputedStyle(appRoot).getPropertyValue(name).trim();
-    return v || &#x27;#999999&#x27;;
+  var themeProbe = null;
+  function themeColor(name, fallback) {
+    if (!themeProbe) {
+      themeProbe = document.createElement(&#x27;span&#x27;);
+      themeProbe.style.display = &#x27;none&#x27;;
+      appRoot.appendChild(themeProbe);
+    }
+    try {
+      themeProbe.style.color = &#x27;var(&#x27; + name + &#x27;)&#x27;;
+      var v = getComputedStyle(themeProbe).color;
+      if (v &amp;&amp; v !== &#x27;transparent&#x27; &amp;&amp; v !== &#x27;rgba(0, 0, 0, 0)&#x27;) return v;
+    } catch (e) {}
+    return fallback || &#x27;#999999&#x27;;
   }
 
   var grid = emptyGrid(), bag = [], holdType = null, canHold = true;
@@ -2109,9 +2120,9 @@ html&gt;body{padding:0}&lt;/style&gt;
   function draw(t) {
     var ctx = bctx;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    ctx.fillStyle = themeColor(&#x27;--card&#x27;);
+    ctx.fillStyle = themeColor(&#x27;--card&#x27;, &#x27;#ffffff&#x27;);
     ctx.fillRect(0, 0, COLS * CELL, ROWS * CELL);
-    ctx.strokeStyle = themeColor(&#x27;--border&#x27;);
+    ctx.strokeStyle = themeColor(&#x27;--border&#x27;, &#x27;rgba(0,0,0,0.18)&#x27;);
     ctx.lineWidth = 1;
     ctx.globalAlpha = 0.55;
     ctx.beginPath();
