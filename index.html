@@ -6,7 +6,7 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>俄罗斯方块</title>
-<style>:root{color-scheme:light;background:rgb(255 255 255)}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+<style>:root{color-scheme:light;background:rgb(255 255 255)}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit;overflow:hidden}@media (max-width:600px){body{padding:0}#zcode-visualization{height:100vh;height:100dvh}}iframe{display:block;width:100%;height:calc(100vh - 2rem);height:calc(100dvh - 2rem);margin:0 auto;border:0}</style>
 </head>
 <body>
 <iframe id="zcode-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="俄罗斯方块" data-srcdoc="&lt;!doctype html&gt;
@@ -1610,104 +1610,102 @@ html&gt;body{padding:0}&lt;/style&gt;
 })();
 &lt;/script&gt;
 &lt;div id=&quot;tetris-app-v1&quot;&gt;
-  &lt;div class=&quot;tw-wrap&quot;&gt;
-    &lt;div class=&quot;tw-board-col&quot;&gt;
-      &lt;div class=&quot;tw-stage&quot;&gt;
-        &lt;div class=&quot;tw-btn-col&quot; aria-label=&quot;左侧按键&quot;&gt;
-          &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-blue&quot; id=&quot;tDrop&quot; aria-label=&quot;硬降&quot; data-tooltip=&quot;硬降&quot;&gt;&lt;i data-lucide=&quot;chevrons-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-          &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-red&quot; id=&quot;tLeft&quot; aria-label=&quot;左移&quot; data-tooltip=&quot;左移&quot;&gt;&lt;i data-lucide=&quot;arrow-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;tw-board-frame&quot;&gt;
-          &lt;canvas id=&quot;twBoard&quot; class=&quot;tw-board&quot; width=&quot;300&quot; height=&quot;600&quot; role=&quot;img&quot; aria-label=&quot;俄罗斯方块棋盘，10 列 20 行&quot;&gt;&lt;/canvas&gt;
-          &lt;div class=&quot;tw-overlay&quot; id=&quot;twOverlay&quot;&gt;
-            &lt;div&gt;
-              &lt;h2 id=&quot;twOvTitle&quot;&gt;俄罗斯方块&lt;/h2&gt;
-              &lt;p class=&quot;text-small text-muted&quot; id=&quot;twOvText&quot;&gt;方向键移动与旋转，空格硬降，C 暂存&lt;/p&gt;
-              &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;twOvBtn&quot;&gt;开始游戏&lt;/button&gt;
-            &lt;/div&gt;
+  &lt;div class=&quot;tw-topbar&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;tw-round tw-pause cursor-interaction&quot; id=&quot;twPauseTop&quot; aria-label=&quot;暂停或继续&quot; data-tooltip=&quot;暂停/继续&quot;&gt;
+      &lt;span class=&quot;tw-ic-pause&quot;&gt;&lt;i data-lucide=&quot;pause&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;span class=&quot;tw-ic-play&quot; hidden&gt;&lt;i data-lucide=&quot;play&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div class=&quot;tw-score-block&quot;&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;分数&lt;/span&gt;
+      &lt;div class=&quot;tw-score-main tabular-nums&quot; id=&quot;twScore&quot;&gt;0&lt;/div&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;最高分 &lt;span class=&quot;tabular-nums&quot; id=&quot;twBest&quot;&gt;0&lt;/span&gt; · 等级 &lt;span class=&quot;tabular-nums&quot; id=&quot;twLevel&quot;&gt;1&lt;/span&gt; · 行数 &lt;span class=&quot;tabular-nums&quot; id=&quot;twLines&quot;&gt;0&lt;/span&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;tw-next-top&quot;&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;下一个&lt;/span&gt;
+      &lt;canvas id=&quot;twNext&quot; width=&quot;64&quot; height=&quot;32&quot;&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tw-wrap&quot; id=&quot;twWrap&quot;&gt;
+    &lt;div class=&quot;tw-stage&quot; id=&quot;twStage&quot;&gt;
+      &lt;div class=&quot;tw-btn-col&quot; aria-label=&quot;左侧按键&quot;&gt;
+        &lt;div class=&quot;tw-spacer&quot;&gt;&lt;/div&gt;
+        &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-blue&quot; id=&quot;tDrop&quot; aria-label=&quot;硬降&quot; data-tooltip=&quot;硬降&quot;&gt;&lt;i data-lucide=&quot;chevrons-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-red&quot; id=&quot;tLeft&quot; aria-label=&quot;左移&quot; data-tooltip=&quot;左移&quot;&gt;&lt;i data-lucide=&quot;arrow-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;tw-board-frame&quot;&gt;
+        &lt;canvas id=&quot;twBoard&quot; class=&quot;tw-board&quot; width=&quot;300&quot; height=&quot;600&quot; role=&quot;img&quot; aria-label=&quot;俄罗斯方块棋盘，10 列 20 行&quot;&gt;&lt;/canvas&gt;
+        &lt;div class=&quot;tw-overlay&quot; id=&quot;twOverlay&quot;&gt;
+          &lt;div&gt;
+            &lt;h2 id=&quot;twOvTitle&quot;&gt;俄罗斯方块&lt;/h2&gt;
+            &lt;p class=&quot;text-small text-muted&quot; id=&quot;twOvText&quot;&gt;方向键移动与旋转，空格硬降，C 暂存&lt;/p&gt;
+            &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;twOvBtn&quot;&gt;开始游戏&lt;/button&gt;
           &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;tw-btn-col&quot; aria-label=&quot;右侧按键&quot;&gt;
-          &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-orange&quot; id=&quot;tRotate&quot; aria-label=&quot;旋转&quot; data-tooltip=&quot;旋转&quot;&gt;&lt;i data-lucide=&quot;rotate-cw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-          &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-red&quot; id=&quot;tRight&quot; aria-label=&quot;右移&quot; data-tooltip=&quot;右移&quot;&gt;&lt;i data-lucide=&quot;arrow-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-        &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;tw-touch&quot; aria-label=&quot;更多操作&quot;&gt;
-        &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tDown&quot; aria-label=&quot;软降&quot; data-tooltip=&quot;软降&quot;&gt;&lt;i data-lucide=&quot;arrow-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-        &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tHold&quot; aria-label=&quot;暂存方块&quot; data-tooltip=&quot;暂存&quot;&gt;&lt;i data-lucide=&quot;repeat&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;div class=&quot;tw-btn-col&quot; aria-label=&quot;右侧按键&quot;&gt;
+        &lt;div class=&quot;tw-spacer&quot;&gt;&lt;/div&gt;
+        &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-orange&quot; id=&quot;tRotate&quot; aria-label=&quot;旋转&quot; data-tooltip=&quot;旋转&quot;&gt;&lt;i data-lucide=&quot;rotate-cw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;tw-round cursor-interaction tw-ic-red&quot; id=&quot;tRight&quot; aria-label=&quot;右移&quot; data-tooltip=&quot;右移&quot;&gt;&lt;i data-lucide=&quot;arrow-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class=&quot;tw-side&quot;&gt;
-      &lt;div class=&quot;tw-box&quot;&gt;
-        &lt;span class=&quot;text-small text-muted&quot;&gt;暂存（C）&lt;/span&gt;
-        &lt;canvas id=&quot;twHold&quot; width=&quot;64&quot; height=&quot;32&quot;&gt;&lt;/canvas&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;tw-stats&quot;&gt;
-        &lt;div class=&quot;tw-stat&quot;&gt;
-          &lt;span class=&quot;text-small text-muted&quot;&gt;分数&lt;/span&gt;
-          &lt;div class=&quot;tw-score tabular-nums&quot; id=&quot;twScore&quot;&gt;0&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;tw-stat&quot;&gt;
-          &lt;span class=&quot;text-small text-muted&quot;&gt;最高分&lt;/span&gt;
-          &lt;div class=&quot;tabular-nums&quot; id=&quot;twBest&quot;&gt;0&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;tw-sub&quot;&gt;
-          &lt;div class=&quot;tw-stat&quot;&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;等级&lt;/span&gt;&lt;div class=&quot;tabular-nums&quot; id=&quot;twLevel&quot;&gt;1&lt;/div&gt;&lt;/div&gt;
-          &lt;div class=&quot;tw-stat&quot;&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;行数&lt;/span&gt;&lt;div class=&quot;tabular-nums&quot; id=&quot;twLines&quot;&gt;0&lt;/div&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;tw-box&quot;&gt;
-        &lt;span class=&quot;text-small text-muted&quot;&gt;下一个&lt;/span&gt;
-        &lt;canvas id=&quot;twNext&quot; width=&quot;64&quot; height=&quot;102&quot;&gt;&lt;/canvas&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;tw-actions&quot;&gt;
-        &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;twPause&quot;&gt;暂停&lt;/button&gt;
-        &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;twRestart&quot;&gt;重开&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;p class=&quot;text-small text-muted tw-keys&quot;&gt;&lt;code&gt;←&lt;/code&gt;&lt;code&gt;→&lt;/code&gt; 移动 · &lt;code&gt;↑&lt;/code&gt;/&lt;code&gt;X&lt;/code&gt; 旋转 · &lt;code&gt;Z&lt;/code&gt; 反转 · &lt;code&gt;↓&lt;/code&gt; 软降 · &lt;code&gt;空格&lt;/code&gt; 硬降 · &lt;code&gt;C&lt;/code&gt; 暂存 · &lt;code&gt;P&lt;/code&gt; 暂停 · &lt;code&gt;R&lt;/code&gt; 重开&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tw-bottom&quot;&gt;
+    &lt;div class=&quot;tw-hold-bottom&quot;&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;暂存&lt;/span&gt;
+      &lt;canvas id=&quot;twHold&quot; width=&quot;64&quot; height=&quot;32&quot;&gt;&lt;/canvas&gt;
     &lt;/div&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tDown&quot; aria-label=&quot;软降&quot; data-tooltip=&quot;软降&quot;&gt;&lt;i data-lucide=&quot;arrow-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;twRestart&quot; aria-label=&quot;重开&quot; data-tooltip=&quot;重开&quot;&gt;重开&lt;/button&gt;
+    &lt;p class=&quot;text-small text-muted tw-keys&quot;&gt;&lt;code&gt;←&lt;/code&gt;&lt;code&gt;→&lt;/code&gt; 移动 · &lt;code&gt;↑&lt;/code&gt;/&lt;code&gt;X&lt;/code&gt; 旋转 · &lt;code&gt;Z&lt;/code&gt; 反转 · &lt;code&gt;↓&lt;/code&gt; 软降 · &lt;code&gt;空格&lt;/code&gt; 硬降 · &lt;code&gt;C&lt;/code&gt; 暂存 · &lt;code&gt;P&lt;/code&gt; 暂停 · &lt;code&gt;R&lt;/code&gt; 重开&lt;/p&gt;
   &lt;/div&gt;
   &lt;div class=&quot;sr-only&quot; aria-live=&quot;polite&quot; id=&quot;twLive&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;style&gt;
   #tetris-app-v1 { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-  #tetris-app-v1 .tw-wrap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: flex-start; }
-  #tetris-app-v1 .tw-board-col { flex: 1 1 300px; max-width: 466px; min-width: 0; }
-  #tetris-app-v1 .tw-stage { display: flex; align-items: flex-end; justify-content: center; gap: 8px; }
-  #tetris-app-v1 .tw-btn-col { display: flex; flex-direction: column; gap: 14px; flex: 0 0 auto; }
-  #tetris-app-v1 .tw-round { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--border); background: var(--card); display: flex; align-items: center; justify-content: center; padding: 0; color: var(--foreground); touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; box-shadow: 0 3px 10px color-mix(in srgb, var(--foreground) 12%, transparent); }
+  #tetris-app-v1 .tw-topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  #tetris-app-v1 .tw-score-block { display: flex; flex-direction: column; align-items: center; line-height: 1.3; }
+  #tetris-app-v1 .tw-score-main { font-size: 24px; font-weight: 500; line-height: 1.15; }
+  #tetris-app-v1 .tw-next-top { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  #tetris-app-v1 .tw-next-top canvas { display: block; width: 64px; height: 32px; }
+  #tetris-app-v1 .tw-wrap { display: flex; justify-content: center; align-items: center; min-height: 0; }
+  #tetris-app-v1 .tw-stage { display: flex; align-items: stretch; gap: 10px; }
+  #tetris-app-v1 .tw-btn-col { display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 0 0 auto; }
+  #tetris-app-v1 .tw-spacer { flex: 1 1 auto; }
+  #tetris-app-v1 .tw-hold-bottom { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  #tetris-app-v1 .tw-hold-bottom canvas { display: block; width: 52px; height: 26px; }
+  #tetris-app-v1 .tw-round { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--border); background: var(--card); box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 0; color: var(--foreground); touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; box-shadow: 0 3px 10px color-mix(in srgb, var(--foreground) 12%, transparent); }
   #tetris-app-v1 .tw-round:active { transform: scale(0.94); background: color-mix(in srgb, var(--primary) 12%, var(--card)); }
-  #tetris-app-v1 .tw-round svg { width: 30px; height: 30px; }
+  #tetris-app-v1 .tw-round svg { width: 28px; height: 28px; }
+  #tetris-app-v1 .tw-pause { width: 48px; height: 48px; }
+  #tetris-app-v1 .tw-pause svg { width: 22px; height: 22px; }
+  #tetris-app-v1 .tw-ic-pause, #tetris-app-v1 .tw-ic-play { display: flex; }
+  #tetris-app-v1 .tw-ic-pause[hidden], #tetris-app-v1 .tw-ic-play[hidden] { display: none; }
   #tetris-app-v1 .tw-ic-blue svg { color: var(--blue); }
   #tetris-app-v1 .tw-ic-red svg { color: var(--red); }
   #tetris-app-v1 .tw-ic-orange svg { color: var(--orange); }
-  #tetris-app-v1 .tw-board-frame { position: relative; flex: 0 1 302px; min-width: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--card); }
-  #tetris-app-v1 .tw-board { display: block; width: 100%; height: auto; }
+  #tetris-app-v1 .tw-board-frame { position: relative; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--card); align-self: center; }
+  #tetris-app-v1 .tw-board { display: block; width: 100%; max-width: 300px; height: auto; }
   #tetris-app-v1 .tw-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; text-align: center; background: var(--popover); background: color-mix(in srgb, var(--popover) 88%, transparent); backdrop-filter: blur(2px); }
   #tetris-app-v1 .tw-overlay[hidden] { display: none; }
   #tetris-app-v1 .tw-overlay h2 { margin: 0 0 6px; }
   #tetris-app-v1 .tw-overlay p { margin: 0 0 14px; }
-  #tetris-app-v1 .tw-touch { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
-  #tetris-app-v1 .tw-touch .btn { touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
-  #tetris-app-v1 .tw-side { flex: 0 1 176px; min-width: 158px; display: flex; flex-direction: column; gap: 12px; }
-  #tetris-app-v1 .tw-box { border: 1px solid var(--border); border-radius: 10px; background: var(--muted); background: color-mix(in srgb, var(--muted) 40%, transparent); padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 4px; }
-  #tetris-app-v1 .tw-box canvas { display: block; width: 64px; height: auto; align-self: center; }
-  #tetris-app-v1 .tw-stats { display: flex; flex-direction: column; gap: 8px; padding: 2px 2px 0; }
-  #tetris-app-v1 .tw-stat &gt; div { font-weight: 500; }
-  #tetris-app-v1 .tw-score { font-weight: 500; }
-  #tetris-app-v1 .tw-sub { display: flex; gap: 18px; }
-  #tetris-app-v1 .tw-actions { display: flex; gap: 8px; }
-  #tetris-app-v1 .tw-keys { margin: 0; line-height: 1.9; }
+  #tetris-app-v1 .tw-bottom { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  #tetris-app-v1 .tw-bottom .btn { touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+  #tetris-app-v1 .tw-keys { margin: 0; line-height: 1.9; flex-basis: 100%; text-align: center; }
   #tetris-app-v1 .tw-keys code { margin-right: 2px; }
-  @media (max-width: 479px) {
-    #tetris-app-v1 .tw-side { flex-direction: row; flex-wrap: wrap; align-items: flex-start; flex: 1 1 100%; }
-    #tetris-app-v1 .tw-box { flex: 1 1 130px; }
-    #tetris-app-v1 .tw-stats { flex: 1 1 120px; }
-    #tetris-app-v1 .tw-stage { gap: 6px; }
-    #tetris-app-v1 .tw-btn-col { gap: 10px; }
-    #tetris-app-v1 .tw-round { width: 56px; height: 56px; }
-    #tetris-app-v1 .tw-round svg { width: 26px; height: 26px; }
+  @media (max-width: 600px) {
+    html, body { height: 100% !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
+    #tetris-app-v1 { height: 100%; display: flex; flex-direction: column; gap: 6px; padding: 6px; box-sizing: border-box; }
+    #tetris-app-v1 .tw-wrap { flex: 1 1 auto; }
+    #tetris-app-v1 .tw-bottom { margin-top: 0; }
+    #tetris-app-v1 .tw-keys { display: none; }
+    #tetris-app-v1 .tw-stage { gap: 5px; }
+    #tetris-app-v1 .tw-btn-col { gap: 22px; }
+    #tetris-app-v1 .tw-round { width: 54px; height: 54px; }
+    #tetris-app-v1 .tw-round svg { width: 25px; height: 25px; }
+    #tetris-app-v1 .tw-hold-bottom canvas { width: 46px; height: 23px; }
+    #tetris-app-v1 .tw-next-top canvas { width: 52px; height: 26px; }
   }
 &lt;/style&gt;
 
@@ -1753,9 +1751,11 @@ html&gt;body{padding:0}&lt;/style&gt;
   function $(id) { return document.getElementById(id); }
   var appRoot = $(&#x27;tetris-app-v1&#x27;);
   var boardC = $(&#x27;twBoard&#x27;), holdC = $(&#x27;twHold&#x27;), nextC = $(&#x27;twNext&#x27;);
+  var wrapEl = $(&#x27;twWrap&#x27;), stageEl = $(&#x27;twStage&#x27;);
+  var btnColL = stageEl.querySelector(&#x27;.tw-btn-col&#x27;);
   var overlay = $(&#x27;twOverlay&#x27;), ovTitle = $(&#x27;twOvTitle&#x27;), ovText = $(&#x27;twOvText&#x27;), ovBtn = $(&#x27;twOvBtn&#x27;);
   var elScore = $(&#x27;twScore&#x27;), elBest = $(&#x27;twBest&#x27;), elLevel = $(&#x27;twLevel&#x27;), elLines = $(&#x27;twLines&#x27;);
-  var elPause = $(&#x27;twPause&#x27;), elRestart = $(&#x27;twRestart&#x27;), live = $(&#x27;twLive&#x27;);
+  var elPause = $(&#x27;twPauseTop&#x27;), elRestart = $(&#x27;twRestart&#x27;), live = $(&#x27;twLive&#x27;);
 
   var DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
   function setupCanvas(c, w, h) {
@@ -1766,7 +1766,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   }
   var bctx = setupCanvas(boardC, 300, 600);
   var hctx = setupCanvas(holdC, 64, 32);
-  var nctx = setupCanvas(nextC, 64, 102);
+  var nctx = setupCanvas(nextC, 64, 32);
 
   function themeColor(name) {
     var v = getComputedStyle(appRoot).getPropertyValue(name).trim();
@@ -1992,7 +1992,10 @@ html&gt;body{padding:0}&lt;/style&gt;
   function hideOverlay() { overlay.hidden = true; syncPause(); }
   function syncPause() {
     elPause.disabled = !(phase === &#x27;playing&#x27; || phase === &#x27;paused&#x27;);
-    elPause.textContent = phase === &#x27;paused&#x27; ? &#x27;继续&#x27; : &#x27;暂停&#x27;;
+    var icPause = elPause.querySelector(&#x27;.tw-ic-pause&#x27;);
+    var icPlay = elPause.querySelector(&#x27;.tw-ic-play&#x27;);
+    if (icPause) icPause.hidden = (phase === &#x27;paused&#x27;);
+    if (icPlay) icPlay.hidden = (phase !== &#x27;paused&#x27;);
   }
 
   function moveAction(d) { if (phase !== &#x27;playing&#x27;) return; if (tryMove(d, 0)) resetLock(); }
@@ -2190,9 +2193,8 @@ html&gt;body{padding:0}&lt;/style&gt;
 
   function drawNext() {
     nctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    nctx.clearRect(0, 0, 64, 102);
-    var n = bag.slice(0, 3);
-    for (var i = 0; i &lt; n.length; i++) drawMini(nctx, n[i], 32, 17 + i * 34, 13);
+    nctx.clearRect(0, 0, 64, 32);
+    if (bag.length) drawMini(nctx, bag[0], 32, 16, 14);
   }
 
   function bindRepeat(el, fn) {
@@ -2254,10 +2256,35 @@ html&gt;body{padding:0}&lt;/style&gt;
     }
   });
 
+  var phoneMQ = window.matchMedia(&#x27;(max-width: 600px)&#x27;);
+  function fitBoard() {
+    if (!wrapEl.clientWidth) return;
+    if (!phoneMQ.matches) {
+      boardC.style.width = &#x27;&#x27;;
+      boardC.style.height = &#x27;&#x27;;
+      return;
+    }
+    var colW = (btnColL &amp;&amp; btnColL.offsetWidth) || 64;
+    var gap = parseFloat(getComputedStyle(stageEl).columnGap) || 10;
+    var availW = wrapEl.clientWidth - 2 * (colW + gap) - 6;
+    var availH = wrapEl.clientHeight - 6;
+    var size = Math.max(120, Math.min(300, availW, availH / 2));
+    var w = Math.round(size), h = Math.round(size * 2);
+    if (boardC.style.width !== w + &#x27;px&#x27;) {
+      boardC.style.width = w + &#x27;px&#x27;;
+      boardC.style.height = h + &#x27;px&#x27;;
+    }
+  }
+  window.addEventListener(&#x27;resize&#x27;, fitBoard);
+  window.addEventListener(&#x27;orientationchange&#x27;, fitBoard);
+  if (phoneMQ.addEventListener) phoneMQ.addEventListener(&#x27;change&#x27;, fitBoard);
+  if (window.ResizeObserver) new ResizeObserver(fitBoard).observe(wrapEl);
+
   updateStats();
   drawHold();
   drawNext();
   syncPause();
+  fitBoard();
   showOverlay(&#x27;俄罗斯方块&#x27;, &#x27;消行得分，每 10 行提速一档&#x27;, &#x27;开始游戏&#x27;);
   requestAnimationFrame(frame);
 })();
